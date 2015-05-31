@@ -1,0 +1,43 @@
+#clavier_lettres td, #clavier_chiffres td{
+	background-color: #A8B8C7;
+	width: 40px;
+	text-align: center;
+	font-size: 1.8em;
+	border-radius: 4px;
+	font-family: 'comic sans ms';
+	padding: 10px;
+	border: transparent ridge 3px;
+	margin-top: 4px;
+}
+
+#clavier_chiffres{
+	float: right;
+}
+
+#clavier_lettres{
+	float: left;
+}
+
+#clavier{
+	width: 500px;
+	height: 260px;
+	/*border: 2px black solid;*/
+	padding: 4px;
+	margin-left: 4%;
+	user-select: none; /* L'utilisateur ne pourra plus sélectionner le texte de l'élément qui possède cette propriété CSS */
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	background-color: transparent;
+	margin-top: 20px;
+	float: left;
+}
+
+#clavier table{
+	border-collapse: separate;
+	border-spacing: 5px 5px; /* Nombre de pixels d'espace horizontal (5px), vertical (8px) */
+}
+
+#clavier_lettres td:hover, #clavier_chiffres td:hover{
+	background-color: #818692;
+}

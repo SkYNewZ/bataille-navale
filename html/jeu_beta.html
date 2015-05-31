@@ -1,0 +1,572 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="icon" href="../img/favicon.ico">
+	<title>Bataille Navale</title>
+	<meta charset='utf-8'>
+	<script src='js/variables_globales.js'></script>
+	<script src='js/fonctions_bateaux_ennemis.js'></script>
+	<script src='js/fonctions_bateaux_amis.js'></script>
+	<script src='js/fonctions_proposition_joueur.js'></script>
+	<script src='js/fonctions_clavier.js'></script>
+	<script src='js/fonctions_son.js'></script>
+	<script type="text/javascript" src="../soundmanager/script/soundmanager2.js"></script>
+	<script src='js/IA.js'></script>
+	<script type="text/javascript">
+		soundManager.url = 'swf/';
+		soundManager.debugMode = true;
+		var klaxon_bateau;
+		var sonar;
+		var canon;
+		var sifflement;
+		var plouf;
+		var game_over;
+		soundManager.onload = function() {
+    		klaxon_bateau = soundManager.createSound(
+    		{
+        		id : "klaxon_bateau",
+        		url : "../wav/bateau.wav" // Attention pas de virgule ici !
+    		});
+    		//klaxon_bateau.play();
+
+    		sonar = soundManager.createSound(
+    		{
+        		id : "sonar",
+        		url : "../wav/sonar.mp3" // Attention pas de virgule ici !
+    		});
+
+    		canon = soundManager.createSound(
+    		{
+        		id : "canon",
+        		url : "../wav/canon.mp3" // Attention pas de virgule ici !
+    		});
+
+    		sifflement = soundManager.createSound(
+    		{
+        		id : "sifflement",
+        		url : "../wav/sifflement.mp3" // Attention pas de virgule ici !
+    		});
+
+    		plouf = soundManager.createSound(
+    		{
+        		id : "plouf",
+        		url : "../wav/plouf.mp3" // Attention pas de virgule ici !
+    		});
+
+    		game_over = soundManager.createSound(
+    		{
+        		id : "game_over",
+        		url : "../wav/game_over.wav" // Attention pas de virgule ici !
+    		});
+		}
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/style_general.css">
+	<link rel="stylesheet" type="text/css" href="css/style_clavier.css">
+	<!--<link rel="stylesheet" type="text/css" href="css/decompte.css">######### pour jouer solo-->
+	<link rel="stylesheet" type="text/css" href="css/decompte_2.css">
+	<link rel="stylesheet" type="text/css" href="css/style_bateaux.css">
+	<link rel="stylesheet" type="text/css" href="css/style_provisoire.css">
+
+	<style type="text/css">
+	article{
+		width: 98%;
+		float: none;
+		margin: auto;
+		padding: 10px;
+	}
+
+	#section_ennemi_masquer{
+		width: 600px;
+		margin-top: 15%;
+	}	
+	</style>
+</head>
+
+
+<body oncontextmenu="return false" onload="confirmations(); remplir_tab(); placer_bateaux_ennemis();">
+	<article>
+		<section id='ennemi'>
+			<div id='section_ennemi_masquer'>
+				<h1>Commencer par choisir votre niveau de difficulté puis placer vos bateaux :</h1>
+				<h5>(En cliquant sur une case, vous placez ou effacez une partie de bateau)</h5>
+				<img src="../img/puceFleche.png">
+				<img src="../img/puceFleche.png">
+				<img src="../img/puceFleche.png">
+				<img src="../img/puceFleche.png">
+				<img src="../img/puceFleche.png">
+				<img src="../img/puceFleche.png">
+				<br><br>
+				<img style='border-radius:8px;' src="../img/bateau - Copie.jpg">
+			</div>
+			<div id='div_ennemi' hidden>
+				<h3>Trouvez les bateaux ennemis en faisant des propositions !</h3>
+				<table name='grille'>
+					<thead>
+						<tr>
+							<td class="remplie"></td>
+							<th class="remplie">A</th>
+							<th class="remplie">B</th>
+							<th class="remplie">C</th>
+							<th class="remplie">D</th>
+							<th class="remplie">E</th>
+							<th class="remplie">F</th>
+							<th class="remplie">G</th>
+							<th class="remplie">H</th>
+							<th class="remplie">I</th>
+							<th class="remplie">J</th>
+							<th class="remplie" hidden></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th class="remplie">1</th>
+							<td id='cel_0_0'></td>
+							<td id='cel_1_0'></td>
+							<td id='cel_2_0'></td>
+							<td id='cel_3_0'></td>
+							<td id='cel_4_0'></td>
+							<td id='cel_5_0'></td>
+							<td id='cel_6_0'></td>
+							<td id='cel_7_0'></td>
+							<td id='cel_8_0'></td>
+							<td id='cel_9_0'></td>
+							<td class='remplie' hidden></td>
+						</tr>
+
+						<tr>
+							<th class="remplie">2</th>
+							<td id='cel_0_1'></td>
+							<td id='cel_1_1'></td>
+							<td id='cel_2_1'></td>
+							<td id='cel_3_1'></td>
+							<td id='cel_4_1'></td>
+							<td id='cel_5_1'></td>
+							<td id='cel_6_1'></td>
+							<td id='cel_7_1'></td>
+							<td id='cel_8_1'></td>
+							<td id='cel_9_1'></td>
+							<td class='remplie' hidden></td>
+						</tr>
+
+						<tr>
+							<th class="remplie">3</th>
+							<td id='cel_0_2'></td>
+							<td id='cel_1_2'></td>
+							<td id='cel_2_2'></td>
+							<td id='cel_3_2'></td>
+							<td id='cel_4_2'></td>
+							<td id='cel_5_2'></td>
+							<td id='cel_6_2'></td>
+							<td id='cel_7_2'></td>
+							<td id='cel_8_2'></td>
+							<td id='cel_9_2'></td>
+							<td class='remplie' hidden></td>
+						</tr>
+
+						<tr>
+							<th class="remplie">4</th>
+							<td id='cel_0_3'></td>
+							<td id='cel_1_3'></td>
+							<td id='cel_2_3'></td>
+							<td id='cel_3_3'></td>
+							<td id='cel_4_3'></td>
+							<td id='cel_5_3'></td>
+							<td id='cel_6_3'></td>
+							<td id='cel_7_3'></td>
+							<td id='cel_8_3'></td>
+							<td id='cel_9_3'></td>
+							<td class='remplie' hidden></td>
+						</tr>
+
+						<tr>
+							<th class="remplie">5</th>
+							<td id='cel_0_4'></td>
+							<td id='cel_1_4'></td>
+							<td id='cel_2_4'></td>
+							<td id='cel_3_4'></td>
+							<td id='cel_4_4'></td>
+							<td id='cel_5_4'></td>
+							<td id='cel_6_4'></td>
+							<td id='cel_7_4'></td>
+							<td id='cel_8_4'></td>
+							<td id='cel_9_4'></td>
+							<td class='remplie' hidden></td>
+						</tr>
+
+						<tr>
+							<th class="remplie">6</th>
+							<td id='cel_0_5'></td>
+							<td id='cel_1_5'></td>
+							<td id='cel_2_5'></td>
+							<td id='cel_3_5'></td>
+							<td id='cel_4_5'></td>
+							<td id='cel_5_5'></td>
+							<td id='cel_6_5'></td>
+							<td id='cel_7_5'></td>
+							<td id='cel_8_5'></td>
+							<td id='cel_9_5'></td>
+							<td class='remplie' hidden></td>
+						</tr>
+
+						<tr>
+							<th class="remplie">7</th>
+							<td id='cel_0_6'></td>
+							<td id='cel_1_6'></td>
+							<td id='cel_2_6'></td>
+							<td id='cel_3_6'></td>
+							<td id='cel_4_6'></td>
+							<td id='cel_5_6'></td>
+							<td id='cel_6_6'></td>
+							<td id='cel_7_6'></td>
+							<td id='cel_8_6'></td>
+							<td id='cel_9_6'></td>
+							<td class='remplie' hidden></td>
+						</tr>
+
+						<tr>
+							<th class="remplie">8</th>
+							<td id='cel_0_7'></td>
+							<td id='cel_1_7'></td>
+							<td id='cel_2_7'></td>
+							<td id='cel_3_7'></td>
+							<td id='cel_4_7'></td>
+							<td id='cel_5_7'></td>
+							<td id='cel_6_7'></td>
+							<td id='cel_7_7'></td>
+							<td id='cel_8_7'></td>
+							<td id='cel_9_7'></td>
+							<td class='remplie' hidden></td>
+						</tr>
+
+						<tr>
+							<th class="remplie">9</th>
+							<td id='cel_0_8'></td>
+							<td id='cel_1_8'></td>
+							<td id='cel_2_8'></td>
+							<td id='cel_3_8'></td>
+							<td id='cel_4_8'></td>
+							<td id='cel_5_8'></td>
+							<td id='cel_6_8'></td>
+							<td id='cel_7_8'></td>
+							<td id='cel_8_8'></td>
+							<td id='cel_9_8'></td>
+							<td class='remplie' hidden></td>
+						</tr>
+
+						<tr>
+							<th class="remplie">10</th>
+							<td id='cel_0_9'></td>
+							<td id='cel_1_9'></td>
+							<td id='cel_2_9'></td>
+							<td id='cel_3_9'></td>
+							<td id='cel_4_9'></td>
+							<td id='cel_5_9'></td>
+							<td id='cel_6_9'></td>
+							<td id='cel_7_9'></td>
+							<td id='cel_8_9'></td>
+							<td id='cel_9_9'></td>
+							<td class='remplie' hidden></td>
+						</tr>
+
+						<tr hidden>
+							<td class="remplie"></td>
+							<td class='remplie'></td>
+							<td class='remplie'></td>
+							<td class='remplie'></td>
+							<td class='remplie'></td>
+							<td class='remplie'></td>
+							<td class='remplie'></td>
+							<td class='remplie'></td>
+							<td class='remplie'></td>
+							<td class='remplie'></td>
+							<td class='remplie'></td>
+							<td class='remplie'></td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+			</div>
+		</section>
+
+		<section id='ecran_titre'>
+			<button onclick="difficulte = 0;after_ecran_titre()">Normal</button>
+			<br>
+			<br>
+			<button onclick="difficulte = 1;after_ecran_titre()">Tricheur</button>	
+		</section>
+
+
+		<section id='ami' name='ami' style='float:none;' hidden>
+			<h3 id='titre_bateau_ami'>Placer vos bateaux (17 restants) :</h3>
+			<table name='grille_2'>
+				<thead>
+					<tr>
+						<td></td>
+						<th>A</th>
+						<th>B</th>
+						<th>C</th>
+						<th>D</th>
+						<th>E</th>
+						<th>F</th>
+						<th>G</th>
+						<th>H</th>
+						<th>I</th>
+						<th>J</th>
+					</tr>
+				</thead>
+				<tbody><!--C'est la lettre qui change-->
+					<tr>
+						<th>1</th>
+						<td id='ami_0_0' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_0' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_0' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_0' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_0' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_0' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_0' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_0' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_0' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_0' axis='1' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>2</th>
+						<td id='ami_0_1' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_1' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_1' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_1' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_1' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_1' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_1' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_1' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_1' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_1' axis='0' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>3</th>
+						<td id='ami_0_2' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_2' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_2' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_2' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_2' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_2' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_2' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_2' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_2' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_2' axis='1' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>4</th>
+						<td id='ami_0_3' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_3' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_3' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_3' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_3' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_3' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_3' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_3' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_3' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_3' axis='0' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>5</th>
+						<td id='ami_0_4' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_4' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_4' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_4' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_4' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_4' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_4' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_4' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_4' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_4' axis='1' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>6</th>
+						<td id='ami_0_5' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_5' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_5' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_5' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_5' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_5' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_5' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_5' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_5' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_5' axis='0' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>7</th>
+						<td id='ami_0_6' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_6' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_6' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_6' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_6' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_6' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_6' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_6' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_6' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_6' axis='1' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>8</th>
+						<td id='ami_0_7' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_7' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_7' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_7' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_7' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_7' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_7' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_7' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_7' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_7' axis='0' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>9</th>
+						<td id='ami_0_8' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_8' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_8' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_8' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_8' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_8' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_8' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_8' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_8' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_8' axis='1' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>10</th>
+						<td id='ami_0_9' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_9' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_9' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_9' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_9' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_9' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_9' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_9' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_9' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_9' axis='0' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+				</tbody>
+			</table>
+			<br>
+			<button onclick="valid_positionnnement(this)">Valider le positionnement</button>
+			<center>
+				<h3 style='width:500px; margin-top:3px' id='rep_ordi'></h3>
+				<div id='button_rep' hidden>
+					<button onclick="after_IA_turn(1)">Touché</button>
+					<button onclick="after_IA_turn(0)">A l'eau</button>
+				</div>
+			</center>
+		</section>
+
+		<div id='img_sound' style="">
+			<img src="../img/sound.png" id='sound' onclick='this.hidden=true; document.getElementById("nosound").hidden=false; jouer_son=0' hidden>
+			<img src="../img/nosound.png" id='nosound' onclick='this.hidden=true; document.getElementById("sound").hidden=false; jouer_son=1' hidden>
+		</div>
+	</article>
+
+	<section id='clavier' hidden>
+		<div id='clavier_lettres'>
+				<table>
+					<tr>
+						<td onclick="recup_value_clavier('A')">A</td>
+						<td onclick="recup_value_clavier('B')">B</td>
+						<td onclick="recup_value_clavier('C')">C</td>
+					</tr>
+
+					<tr>
+						<td onclick="recup_value_clavier('D')">D</td>
+						<td onclick="recup_value_clavier('E')">E</td>
+						<td onclick="recup_value_clavier('F')">F</td>
+					</tr>
+
+					<tr>
+						<td onclick="recup_value_clavier('G')">G</td>
+						<td onclick="recup_value_clavier('H')">H</td>
+						<td onclick="recup_value_clavier('I')">I</td>
+					</tr>
+
+					<tr>
+						<td style='background-color: transparent'></td>
+						<td onclick="recup_value_clavier('J')">J</td>
+						<td style='background-color: transparent'></td>
+					</tr>
+				</table>
+		</div>
+
+
+		<div id='clavier_chiffres'>
+				<table>
+					<tr>
+						<td onclick="recup_value_clavier(1)">1</td>
+						<td onclick="recup_value_clavier(2)">2</td>
+						<td onclick="recup_value_clavier(3)">3</td>
+					</tr>
+
+					<tr>
+						<td onclick="recup_value_clavier(4)">4</td>
+						<td onclick="recup_value_clavier(5)">5</td>
+						<td onclick="recup_value_clavier(6)">6</td>
+					</tr>
+
+					<tr>
+						<td onclick="recup_value_clavier(7)">7</td>
+						<td onclick="recup_value_clavier(8)">8</td>
+						<td onclick="recup_value_clavier(9)">9</td>
+					</tr>
+
+					<tr>
+						<td style='background-color: transparent'></td>
+						<td onclick="recup_value_clavier(10)">10</td>
+						<td style='background-color: transparent'></td>
+					</tr>
+				</table>
+		</div>
+	</section>
+
+	<div id='div_reponse' style="text-align: center" hidden>
+		<p id='phrase_prop' style='font-size: 2em'>Vous proposez :<br><span id='tirets'>--</span></p>
+		<!--<input id='valid_frappe' type='button' value="Tirer !" onclick='recup_value()'>-->
+		<p id='reponse' style='font-size: 2em'></p>
+		<p id='bat_restants' style='font-size: 1.5em'></p>
+	</div>
+
+	<div id='h1_final' hidden>
+		<h1 id='h1_phrase'>On a gagné ! Nous avons coulé la flotte ennemie !!</h1>
+		<img src="../img/final_2.png" id='feu_artifice'>
+	</div>
+
+	<div id='decompte' onmousedown="return false" hidden>
+		<h3 id='decompte_h3'><i>Munitions restantes :</i></h3>
+		<img class='decompte_img_dizaine' id='decompte_4_1' src='../img/decompte/4.png'><!--
+		--><img class='decompte_img_dizaine' id='decompte_3_1' src='../img/decompte/3.png' hidden><!--
+		--><img class='decompte_img_dizaine' id='decompte_2_1' src='../img/decompte/2.png' hidden><!--
+		--><img class='decompte_img_dizaine' id='decompte_1_1' src='../img/decompte/1.png' hidden><!--
+		--><img class='decompte_img_dizaine' id='decompte_0_1' src='../img/decompte/0.png' hidden><!--
+		--><img class='decompte_img_unite' id='decompte_0' src='../img/decompte/0.png'><!--
+		--><img class='decompte_img_unite' id='decompte_1' src='../img/decompte/1.png' hidden><!--
+		--><img class='decompte_img_unite' id='decompte_2' src='../img/decompte/2.png' hidden><!--
+		--><img class='decompte_img_unite' id='decompte_3' src='../img/decompte/3.png' hidden><!--
+		--><img class='decompte_img_unite' id='decompte_4' src='../img/decompte/4.png' hidden><!--
+		--><img class='decompte_img_unite' id='decompte_5' src='../img/decompte/5.png' hidden><!--
+		--><img class='decompte_img_unite' id='decompte_6' src='../img/decompte/6.png' hidden><!--
+		--><img class='decompte_img_unite' id='decompte_7' src='../img/decompte/7.png' hidden><!--
+		--><img class='decompte_img_unite' id='decompte_8' src='../img/decompte/8.png' hidden><!--
+		--><img class='decompte_img_unite' id='decompte_9' src='../img/decompte/9.png' hidden>
+		<br>
+		<br>
+		<img id='valid_frappe' src="../img/button_2.png" onclick='recup_value()' onmousedown="this.src='../img/button_3.png'" onmouseout="this.src='../img/button_2.png'">
+		<br>
+		<img id='drapeau_forfait' src="../img/drapeau.png" onmouseout="this.src='../img/drapeau.png'" onmouseover="this.src='../img/drapeau_2.png'" onclick="forfait = 1; fin_partie();">
+	</div>
+
+</body>
+</html>

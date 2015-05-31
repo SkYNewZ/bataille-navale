@@ -1,0 +1,62 @@
+<head>
+	<link rel="stylesheet" type="text/css" href="css/style_clavier.css">
+	<script src='fonctions_clavier.js'></script>
+</head>
+<body onload="creer_clavier();">
+	<section id='clavier'>
+		<div id='clavier_lettres'>
+			<table>
+				<tr>
+					<td onclick="recup_value('A')">A</td>
+					<td onclick="recup_value('B')">B</td>
+					<td onclick="recup_value('C')">C</td>
+				</tr>
+
+				<tr>
+					<td onclick="recup_value('D')">D</td>
+					<td onclick="recup_value('E')">E</td>
+					<td onclick="recup_value('F')">F</td>
+				</tr>
+
+				<tr>
+					<td onclick="recup_value('G')">G</td>
+					<td onclick="recup_value('H')">H</td>
+					<td onclick="recup_value('I')">I</td>
+				</tr>
+
+				<tr>
+					<td style='background-color: white'></td>
+					<td onclick="recup_value('J')">J</td>
+					<td style='background-color: white'></td>
+				</tr>
+			</table>
+		</div>
+		<div id='clavier_chiffres'>
+			<table>
+				<tr>
+					<td onclick="recup_value(1)">1</td>
+					<td onclick="recup_value(2)">2</td>
+					<td onclick="recup_value(3)">3</td>
+				</tr>
+
+				<tr>
+					<td onclick="recup_value(4)">4</td>
+					<td onclick="recup_value(5)">5</td>
+					<td onclick="recup_value(6)">6</td>
+				</tr>
+
+				<tr>
+					<td onclick="recup_value(7)">7</td>
+					<td onclick="recup_value(8)">8</td>
+					<td onclick="recup_value(9)">9</td>
+				</tr>
+
+				<tr>
+					<td style='background-color: white'></td>
+					<td onclick="recup_value(10)">10</td>
+					<td style='background-color: white'></td>
+				</tr>
+			</table>
+		</div>
+	</section>
+</body>

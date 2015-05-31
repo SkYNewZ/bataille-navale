@@ -1,0 +1,25 @@
+.decompte_img_unite, .decompte_img_dizaine{
+	border-top: 4px ridge white;
+	border-bottom: 4px ridge white;
+	margin: 0px;
+	padding: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+#decompte{
+	text-align: center;
+	position: absolute;
+	right: 41%;
+	top: 10%;
+}
+
+.decompte_img_dizaine{
+	border-left: 4px ridge white;
+	border-right: 1px solid white;
+}
+
+.decompte_img_unite{
+	border-right: 4px ridge white;
+	border-left: 0px solid white;
+}

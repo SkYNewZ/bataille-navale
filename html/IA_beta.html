@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="icon" href="../img/favicon.ico">
+	<title>Bataille Navale - BETA</title>
+	<meta charset='utf-8'>
+	<script src='js/variables_globales.js'></script>
+	<script src='js/fonctions_bateaux_ennemis.js'></script>
+	<script src='js/fonctions_bateaux_amis.js'></script>
+	<script src='js/fonctions_proposition_joueur.js'></script>
+	<script src='js/fonctions_clavier.js'></script>
+	<script src='js/fonctions_son.js'></script>
+	<script src='js/IA.js'></script>
+	<script type="text/javascript" src="../soundmanager/script/soundmanager2.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style_general.css">
+	<link rel="stylesheet" type="text/css" href="css/style_clavier.css">
+	<!--<link rel="stylesheet" type="text/css" href="css/decompte.css">######### pour jouer solo-->
+	<link rel="stylesheet" type="text/css" href="css/decompte_2.css">
+	<link rel="stylesheet" type="text/css" href="css/style_bateaux.css">
+	<link rel="stylesheet" type="text/css" href="css/style_provisoire.css">
+
+	<style type="text/css">
+	article{
+		width: 98%;
+		float: none;
+		margin: auto;
+		padding: 10px;
+	}
+
+	#section_ennemi_masquer{
+		width: 600px;
+		margin-top: 20%;
+	}	
+	</style>
+</head>
+
+<body onload='remplir_tab_ami()'>
+	<center>
+		<section id='ecran_titre'>
+			<button onclick="difficulte = 0; document.getElementById('ecran_titre').hidden=true; document.getElementById('ami').hidden=false">Normal</button>	
+			<button onclick="difficulte = 1; document.getElementById('ecran_titre').hidden=true; document.getElementById('ami').hidden=false">Tricheur</button>	
+		</section>
+
+		<section id='ami' name='ami' style='float:none;' hidden>
+			<h3 id='titre_bateau_ami'>Placer vos bateaux (17 restants) :</h3>
+			<table name='grille_2'>
+				<thead>
+					<tr>
+						<td></td>
+						<th>A</th>
+						<th>B</th>
+						<th>C</th>
+						<th>D</th>
+						<th>E</th>
+						<th>F</th>
+						<th>G</th>
+						<th>H</th>
+						<th>I</th>
+						<th>J</th>
+					</tr>
+				</thead>
+				<tbody><!--C'est la lettre qui change-->
+					<tr>
+						<th>1</th>
+						<td id='ami_0_0' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_0' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_0' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_0' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_0' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_0' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_0' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_0' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_0' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_0' axis='1' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>2</th>
+						<td id='ami_0_1' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_1' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_1' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_1' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_1' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_1' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_1' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_1' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_1' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_1' axis='0' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>3</th>
+						<td id='ami_0_2' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_2' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_2' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_2' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_2' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_2' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_2' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_2' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_2' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_2' axis='1' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>4</th>
+						<td id='ami_0_3' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_3' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_3' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_3' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_3' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_3' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_3' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_3' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_3' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_3' axis='0' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>5</th>
+						<td id='ami_0_4' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_4' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_4' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_4' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_4' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_4' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_4' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_4' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_4' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_4' axis='1' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>6</th>
+						<td id='ami_0_5' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_5' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_5' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_5' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_5' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_5' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_5' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_5' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_5' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_5' axis='0' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>7</th>
+						<td id='ami_0_6' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_6' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_6' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_6' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_6' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_6' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_6' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_6' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_6' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_6' axis='1' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>8</th>
+						<td id='ami_0_7' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_7' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_7' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_7' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_7' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_7' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_7' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_7' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_7' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_7' axis='0' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>9</th>
+						<td id='ami_0_8' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_8' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_8' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_8' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_8' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_8' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_8' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_8' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_8' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_8' axis='1' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+
+					<tr>
+						<th>10</th>
+						<td id='ami_0_9' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_1_9' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_2_9' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_3_9' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_4_9' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_5_9' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_6_9' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_7_9' axis='0' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_8_9' axis='1' onclick="test_bateaux_perso(this)"></td>
+						<td id='ami_9_9' axis='0' onclick="test_bateaux_perso(this)"></td>
+					</tr>
+				</tbody>
+			</table>
+			<br>
+			<button onclick="valid_positionnnement(this)">Valider le positionnement</button>
+			<br><br>
+			<h2 id='rep_ordi'></h2>
+		</section>
+	</center>
+</body>
+</html>

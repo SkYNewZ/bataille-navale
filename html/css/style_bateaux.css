@@ -1,0 +1,46 @@
+#img_bateau{
+	width: 99%;
+	height: 99%;
+	border-radius: 15px;
+}
+
+#croix{
+	width: 100%;
+}
+
+#ennemi{
+	float: left;
+	margin-left: 20px;
+}
+
+#ami{
+	float: right;
+	margin-right: 20px;
+}
+
+section{
+	text-align: center;
+	margin: auto;
+}
+
+.case_rouge{
+	background-color: red;
+}
+
+.case_ini{
+	background-color: black;
+}
+
+.a_leau{
+	background-color: #1F497D;
+}
+
+.reset_case{
+	/*background-color: white;*/
+	background-image: url(../../img/case_touche.png);
+	background-position:  center;
+}
+
+.case_grise{
+	background-color: #A8B8C7;
+}
