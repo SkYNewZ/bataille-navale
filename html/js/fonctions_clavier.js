@@ -1,4 +1,4 @@
-function recup_value_clavier (caractere) {
+function recup_value_clavier(caractere) {
 	var tirets = document.getElementById('tirets');
 	proposition = caractere;
 	var place = 2;
@@ -12,14 +12,14 @@ function recup_value_clavier (caractere) {
 	tirets.innerHTML = tab_tirets.join('');
 }
 
-function reset_tab_tirets () {
-	for (var i=0; i<=1;i++){ // ######## reset les tirets et reafficher
-	tab_tirets[i] = '-';
+function reset_tab_tirets() {
+	for (var i = 0; i <= 1; i++) { // ######## reset les tirets et reafficher
+		tab_tirets[i] = '-';
 	}
 	document.getElementById('tirets').innerHTML = tab_tirets.join('');
 }
 
-function decompte(){
+function decompte() {
 	var decompte_h3 = document.getElementById('decompte_h3');
 
 	var dizaine_0 = document.getElementById('decompte_0_1');
@@ -48,22 +48,22 @@ function decompte(){
 
 	var unite_3 = document.getElementById('decompte_3');
 	unite_3.hidden = true;
-	
+
 	var unite_4 = document.getElementById('decompte_4');
 	unite_4.hidden = true;
-	
+
 	var unite_5 = document.getElementById('decompte_5');
 	unite_5.hidden = true;
-	
+
 	var unite_6 = document.getElementById('decompte_6');
 	unite_6.hidden = true;
-	
+
 	var unite_7 = document.getElementById('decompte_7');
 	unite_7.hidden = true;
-	
+
 	var unite_8 = document.getElementById('decompte_8');
 	unite_8.hidden = true;
-	
+
 	var unite_9 = document.getElementById('decompte_9');
 	unite_9.hidden = true;
 
@@ -74,52 +74,52 @@ function decompte(){
 	if (!munitions) {
 		decompte_h3.innerHTML = 'Plus de munitions';
 	};
-	
-	switch (munitions){
+
+	switch (munitions) {
 		case 39:
 			dizaine_3.hidden = false;
 			unite_9.hidden = false;
-		break;
+			break;
 
 		case 38:
 			dizaine_3.hidden = false;
 			unite_8.hidden = false;
-		break;
+			break;
 
 		case 37:
 			dizaine_3.hidden = false;
 			unite_7.hidden = false;
-		break;
+			break;
 
 		case 36:
 			dizaine_3.hidden = false;
 			unite_6.hidden = false;
-		break;
+			break;
 
 		case 35:
 			dizaine_3.hidden = false;
 			unite_5.hidden = false;
-		break;
+			break;
 
 		case 34:
 			dizaine_3.hidden = false;
 			unite_4.hidden = false;
-		break;
+			break;
 
 		case 33:
 			dizaine_3.hidden = false;
 			unite_3.hidden = false;
-		break;
+			break;
 
 		case 32:
 			dizaine_3.hidden = false;
 			unite_2.hidden = false;
-		break;
+			break;
 
 		case 31:
 			dizaine_3.hidden = false;
 			unite_1.hidden = false;
-		break;
+			break;
 
 
 
@@ -128,156 +128,156 @@ function decompte(){
 		case 30:
 			dizaine_3.hidden = false;
 			dizaine_0.hidden = false;
-		break;
+			break;
 
 		case 29:
 			dizaine_2.hidden = false;
 			unite_9.hidden = false;
-		break;
+			break;
 
 		case 28:
 			dizaine_2.hidden = false;
 			unite_8.hidden = false;
-		break;
+			break;
 
 		case 27:
 			dizaine_2.hidden = false;
 			unite_7.hidden = false;
-		break;
+			break;
 
 		case 26:
 			dizaine_2.hidden = false;
 			unite_6.hidden = false;
-		break;
+			break;
 
 		case 25:
 			dizaine_2.hidden = false;
 			unite_5.hidden = false;
-		break;
+			break;
 
 		case 24:
 			dizaine_2.hidden = false;
 			unite_4.hidden = false;
-		break;
+			break;
 
 		case 23:
 			dizaine_2.hidden = false;
 			unite_3.hidden = false;
-		break;
+			break;
 
 		case 22:
 			dizaine_2.hidden = false;
 			unite_2.hidden = false;
-		break;
+			break;
 
 		case 21:
 			dizaine_2.hidden = false;
 			unite_1.hidden = false;
-		break;
+			break;
 
 		case 20:
 			dizaine_2.hidden = false;
 			unite_0.hidden = false;
-		break;
+			break;
 
 		case 19:
 			dizaine_1.hidden = false;
 			unite_9.hidden = false;
-		break;
+			break;
 
 		case 18:
 			dizaine_1.hidden = false;
 			unite_8.hidden = false;
-		break;
+			break;
 
 		case 17:
 			dizaine_1.hidden = false;
 			unite_7.hidden = false;
-		break;
+			break;
 
 		case 16:
 			dizaine_1.hidden = false;
 			unite_6.hidden = false;
-		break;
+			break;
 
 		case 15:
 			dizaine_1.hidden = false;
 			unite_5.hidden = false;
-		break;
+			break;
 
 		case 14:
 			dizaine_1.hidden = false;
 			unite_4.hidden = false;
-		break;
+			break;
 
 		case 13:
 			dizaine_1.hidden = false;
 			unite_3.hidden = false;
-		break;
+			break;
 
 		case 12:
 			dizaine_1.hidden = false;
 			unite_2.hidden = false;
-		break;
+			break;
 
 		case 11:
 			dizaine_1.hidden = false;
 			unite_1.hidden = false;
-		break;
+			break;
 
 		case 10:
 			dizaine_1.hidden = false;
 			unite_0.hidden = false;
-		break;
+			break;
 
 		case 9:
 			dizaine_0.hidden = false;
 			unite_9.hidden = false;
-		break;
+			break;
 
 		case 8:
 			dizaine_0.hidden = false;
 			unite_8.hidden = false;
-		break;
+			break;
 
 		case 7:
 			dizaine_0.hidden = false;
 			unite_7.hidden = false;
-		break;
+			break;
 
 		case 6:
 			dizaine_0.hidden = false;
 			unite_6.hidden = false;
-		break;
+			break;
 
 		case 5:
 			dizaine_0.hidden = false;
 			unite_5.hidden = false;
-		break;
+			break;
 
 		case 4:
 			dizaine_0.hidden = false;
 			unite_4.hidden = false;
-		break;
+			break;
 
 		case 3:
 			dizaine_0.hidden = false;
 			unite_3.hidden = false;
-		break;
+			break;
 
 		case 2:
 			dizaine_0.hidden = false;
 			unite_2.hidden = false;
-		break;
+			break;
 
 		case 1:
 			dizaine_0.hidden = false;
 			unite_1.hidden = false;
-		break;
+			break;
 
 		case 0:
 			dizaine_0.hidden = false;
 			unite_0.hidden = false;
-		break;
+			break;
 	}
 }

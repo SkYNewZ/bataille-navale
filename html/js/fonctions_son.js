@@ -1,11 +1,11 @@
-function gagne(){
-    sifflement.play();
-    setTimeout(function(){canon.play();}, 2000);
+function gagne() {
+	sifflement.play();
+	setTimeout(function () { canon.play(); }, 2000);
 }
 
-function perdu(){
-    sifflement.play();
-    setTimeout(function(){plouf.play();}, 2000);
+function perdu() {
+	sifflement.play();
+	setTimeout(function () { plouf.play(); }, 2000);
 }
 
 /*function button_son(element){
@@ -23,7 +23,7 @@ function perdu(){
 	};
 }*/
 
-function img_son(){
+function img_son() {
 	var nosound = document.getElementById('nosound');
 	var sound = document.getElementById('sound');
 	nosound.hidden = true;

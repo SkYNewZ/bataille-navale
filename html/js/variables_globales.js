@@ -4,7 +4,7 @@
 
 var //coloriage_bateaux = prompt('bateaux'),
 	coloriage_bateaux = 0,
-	jouer_son=1;
+	jouer_son = 1;
 
 var tab1 = new Array();
 var nb_cases_bateaux_perso = 17,
@@ -23,19 +23,19 @@ var colonne_selec,
 	test_bat3 = 0;
 
 var proposition,
-	alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J'],
-	counter_bat1=1,
-	counter_bat2=2,
-	counter_bat3=6,
-	counter_bat4=4,
-	counter_bat5=5,
-	total_count_bat=17,
+	alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'],
+	counter_bat1 = 1,
+	counter_bat2 = 2,
+	counter_bat3 = 6,
+	counter_bat4 = 4,
+	counter_bat5 = 5,
+	total_count_bat = 17,
 	munitions = 40,
 	//munitions = prompt('Munitions ?');
 	forfait = 0;
 
 
-var tab_tirets = ['-','-'];
+var tab_tirets = ['-', '-'];
 
 var tab_triche = [];
 var tab_axis_0 = [];

@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
 	<link rel="icon" href="../img/favicon.ico">
 	<title>Bataille Navale - BETA</title>
@@ -20,25 +21,27 @@
 	<link rel="stylesheet" type="text/css" href="css/style_provisoire.css">
 
 	<style type="text/css">
-	article{
-		width: 98%;
-		float: none;
-		margin: auto;
-		padding: 10px;
-	}
+		article {
+			width: 98%;
+			float: none;
+			margin: auto;
+			padding: 10px;
+		}
 
-	#section_ennemi_masquer{
-		width: 600px;
-		margin-top: 20%;
-	}	
+		#section_ennemi_masquer {
+			width: 600px;
+			margin-top: 20%;
+		}
 	</style>
 </head>
 
 <body onload='remplir_tab_ami()'>
 	<center>
 		<section id='ecran_titre'>
-			<button onclick="difficulte = 0; document.getElementById('ecran_titre').hidden=true; document.getElementById('ami').hidden=false">Normal</button>	
-			<button onclick="difficulte = 1; document.getElementById('ecran_titre').hidden=true; document.getElementById('ami').hidden=false">Tricheur</button>	
+			<button
+				onclick="difficulte = 0; document.getElementById('ecran_titre').hidden=true; document.getElementById('ami').hidden=false">Normal</button>
+			<button
+				onclick="difficulte = 1; document.getElementById('ecran_titre').hidden=true; document.getElementById('ami').hidden=false">Tricheur</button>
 		</section>
 
 		<section id='ami' name='ami' style='float:none;' hidden>
@@ -59,7 +62,8 @@
 						<th>J</th>
 					</tr>
 				</thead>
-				<tbody><!--C'est la lettre qui change-->
+				<tbody>
+					<!--C'est la lettre qui change-->
 					<tr>
 						<th>1</th>
 						<td id='ami_0_0' axis='0' onclick="test_bateaux_perso(this)"></td>
@@ -208,4 +212,5 @@
 		</section>
 	</center>
 </body>
-</html>
+
+<html>

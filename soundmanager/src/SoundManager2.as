@@ -15,7 +15,7 @@
  * ActionScript Sound class reference (Macromedia), documentation download:
  * http://livedocs.macromedia.com/flash/8/
  * Previously-live URL:
- * http://livedocs.macromedia.com/flash/8/main/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Parts&file=00002668.html
+ * http://livedocs.macromedia.com/flash/8/main/wwhelp/wwhimpl/commonhtml/wwhelp.htm?context=LiveDocs_Parts&file=00002668.html
  *
  * *** NOTE ON LOCAL FILE SYSTEM ACCESS ***
  *

@@ -2441,7 +2441,7 @@ function SoundManager(smURL, smID) {
        * Note: Setting volume has no effect on iOS "special snowflake" devices.
        * Hardware volume control overrides software, and volume
        * will always return 1 per Apple docs. (iOS 4 + 5.)
-       * http://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/HTML-canvas-guide/AddingSoundtoCanvasAnimations/AddingSoundtoCanvasAnimations.html
+       * http://developer.apple.com/library/safari/documentation/AudioVideo/Conceptualhtml-canvas-guide/AddingSoundtoCanvasAnimations/AddingSoundtoCanvasAnimations.html
        */
 
       if (nVol === _undefined) {
@@ -2873,7 +2873,7 @@ function SoundManager(smURL, smID) {
     this._apply_loop = function(a, nLoops) {
 
       /**
-       * boolean instead of "loop", for webkit? - spec says string. http://www.w3.org/TR/html-markup/audio.html#audio.attrs.loop
+       * boolean instead of "loop", for webkit? - spec says string. http://www.w3.org/TRhtml-markup/audio.html#audio.attrs.loop
        * note that loop is either off or infinite under HTML5, unlike Flash which allows arbitrary loop counts to be specified.
        */
 

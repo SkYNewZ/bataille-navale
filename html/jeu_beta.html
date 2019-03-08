@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
 	<link rel="icon" href="../img/favicon.ico">
 	<title>Bataille Navale</title>
@@ -10,7 +11,7 @@
 	<script src='js/fonctions_proposition_joueur.js'></script>
 	<script src='js/fonctions_clavier.js'></script>
 	<script src='js/fonctions_son.js'></script>
-	<script type="text/javascript" src="../soundmanager/script/soundmanager2.js"></script>
+	<script type="text/javascript" src="..//soundmanager/script/soundmanager2.js"></script>
 	<script src='js/IA.js'></script>
 	<script type="text/javascript">
 		soundManager.url = 'swf/';
@@ -21,43 +22,43 @@
 		var sifflement;
 		var plouf;
 		var game_over;
-		soundManager.onload = function() {
-    		klaxon_bateau = soundManager.createSound(
-    		{
-        		id : "klaxon_bateau",
-        		url : "../wav/bateau.wav" // Attention pas de virgule ici !
-    		});
-    		//klaxon_bateau.play();
+		soundManager.onload = function () {
+			klaxon_bateau = soundManager.createSound(
+				{
+					id: "klaxon_bateau",
+					url: "../wav/bateau.wav" // Attention pas de virgule ici !
+				});
+			//klaxon_bateau.play();
 
-    		sonar = soundManager.createSound(
-    		{
-        		id : "sonar",
-        		url : "../wav/sonar.mp3" // Attention pas de virgule ici !
-    		});
+			sonar = soundManager.createSound(
+				{
+					id: "sonar",
+					url: "../wav/sonar.mp3" // Attention pas de virgule ici !
+				});
 
-    		canon = soundManager.createSound(
-    		{
-        		id : "canon",
-        		url : "../wav/canon.mp3" // Attention pas de virgule ici !
-    		});
+			canon = soundManager.createSound(
+				{
+					id: "canon",
+					url: "../wav/canon.mp3" // Attention pas de virgule ici !
+				});
 
-    		sifflement = soundManager.createSound(
-    		{
-        		id : "sifflement",
-        		url : "../wav/sifflement.mp3" // Attention pas de virgule ici !
-    		});
+			sifflement = soundManager.createSound(
+				{
+					id: "sifflement",
+					url: "../wav/sifflement.mp3" // Attention pas de virgule ici !
+				});
 
-    		plouf = soundManager.createSound(
-    		{
-        		id : "plouf",
-        		url : "../wav/plouf.mp3" // Attention pas de virgule ici !
-    		});
+			plouf = soundManager.createSound(
+				{
+					id: "plouf",
+					url: "../wav/plouf.mp3" // Attention pas de virgule ici !
+				});
 
-    		game_over = soundManager.createSound(
-    		{
-        		id : "game_over",
-        		url : "../wav/game_over.wav" // Attention pas de virgule ici !
-    		});
+			game_over = soundManager.createSound(
+				{
+					id: "game_over",
+					url: "../wav/game_over.wav" // Attention pas de virgule ici !
+				});
 		}
 	</script>
 	<link rel="stylesheet" type="text/css" href="css/style_general.css">
@@ -68,17 +69,17 @@
 	<link rel="stylesheet" type="text/css" href="css/style_provisoire.css">
 
 	<style type="text/css">
-	article{
-		width: 98%;
-		float: none;
-		margin: auto;
-		padding: 10px;
-	}
+		article {
+			width: 98%;
+			float: none;
+			margin: auto;
+			padding: 10px;
+		}
 
-	#section_ennemi_masquer{
-		width: 600px;
-		margin-top: 15%;
-	}	
+		#section_ennemi_masquer {
+			width: 600px;
+			margin-top: 15%;
+		}
 	</style>
 </head>
 
@@ -292,7 +293,7 @@
 			<button onclick="difficulte = 0;after_ecran_titre()">Normal</button>
 			<br>
 			<br>
-			<button onclick="difficulte = 1;after_ecran_titre()">Tricheur</button>	
+			<button onclick="difficulte = 1;after_ecran_titre()">Tricheur</button>
 		</section>
 
 
@@ -314,7 +315,8 @@
 						<th>J</th>
 					</tr>
 				</thead>
-				<tbody><!--C'est la lettre qui change-->
+				<tbody>
+					<!--C'est la lettre qui change-->
 					<tr>
 						<th>1</th>
 						<td id='ami_0_0' axis='0' onclick="test_bateaux_perso(this)"></td>
@@ -468,67 +470,69 @@
 		</section>
 
 		<div id='img_sound' style="">
-			<img src="../img/sound.png" id='sound' onclick='this.hidden=true; document.getElementById("nosound").hidden=false; jouer_son=0' hidden>
-			<img src="../img/nosound.png" id='nosound' onclick='this.hidden=true; document.getElementById("sound").hidden=false; jouer_son=1' hidden>
+			<img src="../img/sound.png" id='sound'
+				onclick='this.hidden=true; document.getElementById("nosound").hidden=false; jouer_son=0' hidden>
+			<img src="../img/nosound.png" id='nosound'
+				onclick='this.hidden=true; document.getElementById("sound").hidden=false; jouer_son=1' hidden>
 		</div>
 	</article>
 
 	<section id='clavier' hidden>
 		<div id='clavier_lettres'>
-				<table>
-					<tr>
-						<td onclick="recup_value_clavier('A')">A</td>
-						<td onclick="recup_value_clavier('B')">B</td>
-						<td onclick="recup_value_clavier('C')">C</td>
-					</tr>
+			<table>
+				<tr>
+					<td onclick="recup_value_clavier('A')">A</td>
+					<td onclick="recup_value_clavier('B')">B</td>
+					<td onclick="recup_value_clavier('C')">C</td>
+				</tr>
 
-					<tr>
-						<td onclick="recup_value_clavier('D')">D</td>
-						<td onclick="recup_value_clavier('E')">E</td>
-						<td onclick="recup_value_clavier('F')">F</td>
-					</tr>
+				<tr>
+					<td onclick="recup_value_clavier('D')">D</td>
+					<td onclick="recup_value_clavier('E')">E</td>
+					<td onclick="recup_value_clavier('F')">F</td>
+				</tr>
 
-					<tr>
-						<td onclick="recup_value_clavier('G')">G</td>
-						<td onclick="recup_value_clavier('H')">H</td>
-						<td onclick="recup_value_clavier('I')">I</td>
-					</tr>
+				<tr>
+					<td onclick="recup_value_clavier('G')">G</td>
+					<td onclick="recup_value_clavier('H')">H</td>
+					<td onclick="recup_value_clavier('I')">I</td>
+				</tr>
 
-					<tr>
-						<td style='background-color: transparent'></td>
-						<td onclick="recup_value_clavier('J')">J</td>
-						<td style='background-color: transparent'></td>
-					</tr>
-				</table>
+				<tr>
+					<td style='background-color: transparent'></td>
+					<td onclick="recup_value_clavier('J')">J</td>
+					<td style='background-color: transparent'></td>
+				</tr>
+			</table>
 		</div>
 
 
 		<div id='clavier_chiffres'>
-				<table>
-					<tr>
-						<td onclick="recup_value_clavier(1)">1</td>
-						<td onclick="recup_value_clavier(2)">2</td>
-						<td onclick="recup_value_clavier(3)">3</td>
-					</tr>
+			<table>
+				<tr>
+					<td onclick="recup_value_clavier(1)">1</td>
+					<td onclick="recup_value_clavier(2)">2</td>
+					<td onclick="recup_value_clavier(3)">3</td>
+				</tr>
 
-					<tr>
-						<td onclick="recup_value_clavier(4)">4</td>
-						<td onclick="recup_value_clavier(5)">5</td>
-						<td onclick="recup_value_clavier(6)">6</td>
-					</tr>
+				<tr>
+					<td onclick="recup_value_clavier(4)">4</td>
+					<td onclick="recup_value_clavier(5)">5</td>
+					<td onclick="recup_value_clavier(6)">6</td>
+				</tr>
 
-					<tr>
-						<td onclick="recup_value_clavier(7)">7</td>
-						<td onclick="recup_value_clavier(8)">8</td>
-						<td onclick="recup_value_clavier(9)">9</td>
-					</tr>
+				<tr>
+					<td onclick="recup_value_clavier(7)">7</td>
+					<td onclick="recup_value_clavier(8)">8</td>
+					<td onclick="recup_value_clavier(9)">9</td>
+				</tr>
 
-					<tr>
-						<td style='background-color: transparent'></td>
-						<td onclick="recup_value_clavier(10)">10</td>
-						<td style='background-color: transparent'></td>
-					</tr>
-				</table>
+				<tr>
+					<td style='background-color: transparent'></td>
+					<td onclick="recup_value_clavier(10)">10</td>
+					<td style='background-color: transparent'></td>
+				</tr>
+			</table>
 		</div>
 	</section>
 
@@ -546,27 +550,44 @@
 
 	<div id='decompte' onmousedown="return false" hidden>
 		<h3 id='decompte_h3'><i>Munitions restantes :</i></h3>
-		<img class='decompte_img_dizaine' id='decompte_4_1' src='../img/decompte/4.png'><!--
-		--><img class='decompte_img_dizaine' id='decompte_3_1' src='../img/decompte/3.png' hidden><!--
-		--><img class='decompte_img_dizaine' id='decompte_2_1' src='../img/decompte/2.png' hidden><!--
-		--><img class='decompte_img_dizaine' id='decompte_1_1' src='../img/decompte/1.png' hidden><!--
-		--><img class='decompte_img_dizaine' id='decompte_0_1' src='../img/decompte/0.png' hidden><!--
-		--><img class='decompte_img_unite' id='decompte_0' src='../img/decompte/0.png'><!--
-		--><img class='decompte_img_unite' id='decompte_1' src='../img/decompte/1.png' hidden><!--
-		--><img class='decompte_img_unite' id='decompte_2' src='../img/decompte/2.png' hidden><!--
-		--><img class='decompte_img_unite' id='decompte_3' src='../img/decompte/3.png' hidden><!--
-		--><img class='decompte_img_unite' id='decompte_4' src='../img/decompte/4.png' hidden><!--
-		--><img class='decompte_img_unite' id='decompte_5' src='../img/decompte/5.png' hidden><!--
-		--><img class='decompte_img_unite' id='decompte_6' src='../img/decompte/6.png' hidden><!--
-		--><img class='decompte_img_unite' id='decompte_7' src='../img/decompte/7.png' hidden><!--
-		--><img class='decompte_img_unite' id='decompte_8' src='../img/decompte/8.png' hidden><!--
+		<img class='decompte_img_dizaine' id='decompte_4_1' src='../img/decompte/4.png'>
+		<!--
+		--><img class='decompte_img_dizaine' id='decompte_3_1' src='../img/decompte/3.png' hidden>
+		<!--
+		--><img class='decompte_img_dizaine' id='decompte_2_1' src='../img/decompte/2.png' hidden>
+		<!--
+		--><img class='decompte_img_dizaine' id='decompte_1_1' src='../img/decompte/1.png' hidden>
+		<!--
+		--><img class='decompte_img_dizaine' id='decompte_0_1' src='../img/decompte/0.png' hidden>
+		<!--
+		--><img class='decompte_img_unite' id='decompte_0' src='../img/decompte/0.png'>
+		<!--
+		--><img class='decompte_img_unite' id='decompte_1' src='../img/decompte/1.png' hidden>
+		<!--
+		--><img class='decompte_img_unite' id='decompte_2' src='../img/decompte/2.png' hidden>
+		<!--
+		--><img class='decompte_img_unite' id='decompte_3' src='../img/decompte/3.png' hidden>
+		<!--
+		--><img class='decompte_img_unite' id='decompte_4' src='../img/decompte/4.png' hidden>
+		<!--
+		--><img class='decompte_img_unite' id='decompte_5' src='../img/decompte/5.png' hidden>
+		<!--
+		--><img class='decompte_img_unite' id='decompte_6' src='../img/decompte/6.png' hidden>
+		<!--
+		--><img class='decompte_img_unite' id='decompte_7' src='../img/decompte/7.png' hidden>
+		<!--
+		--><img class='decompte_img_unite' id='decompte_8' src='../img/decompte/8.png' hidden>
+		<!--
 		--><img class='decompte_img_unite' id='decompte_9' src='../img/decompte/9.png' hidden>
 		<br>
 		<br>
-		<img id='valid_frappe' src="../img/button_2.png" onclick='recup_value()' onmousedown="this.src='../img/button_3.png'" onmouseout="this.src='../img/button_2.png'">
+		<img id='valid_frappe' src="../img/button_2.png" onclick='recup_value()'
+			onmousedown="this.src='../img/button_3.png'" onmouseout="this.src='../img/button_2.png'">
 		<br>
-		<img id='drapeau_forfait' src="../img/drapeau.png" onmouseout="this.src='../img/drapeau.png'" onmouseover="this.src='../img/drapeau_2.png'" onclick="forfait = 1; fin_partie();">
+		<img id='drapeau_forfait' src="../img/drapeau.png" onmouseout="this.src='../img/drapeau.png'"
+			onmouseover="this.src='../img/drapeau_2.png'" onclick="forfait = 1; fin_partie();">
 	</div>
 
 </body>
-</html>
+
+<html>
